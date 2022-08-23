@@ -7,19 +7,19 @@ doc
 #!/bin/bash
 
 # The directory names
-question_answer_directory=question_answer_bank			#This directory contains questions.txt and answer.txt files
-user_info_directory=.user_info					#This hidden directory contains user_name.csv and user_pass.csv files
-user_response_directory=.user_response				#This hidden dierctory contains all the user's_response.txt files
+question_answer_directory=question_answer_bank				#This directory contains questions.txt and answer.txt files
+user_info_directory=.user_info						#This hidden directory contains user_name.csv and user_pass.csv files
+user_response_directory=.user_response					#This hidden dierctory contains all the user's_response.txt files
 
 # The file names
 question_bank=./"$question_answer_directory"/questions.txt		#questions.txt file contains all the questions for the test
-correct_answer_file=./"$question_answer_directory"/answer.txt	#answer.txt file contains all the answers of each question inside questions.txt file
+correct_answer_file=./"$question_answer_directory"/answer.txt		#answer.txt file contains all the answers of each question inside questions.txt file
 username_file=./"$user_info_directory"/user_name.csv			#user_name.csv file contains the user names of each user who has signed up
 userpass_file=./"$user_info_directory"/user_pass.csv			#user_pass.csv file contains the user passwords of each user who has signed up
 
 # Global variables
 no_of_ques=10					    			#number of questions present in questions.txt file
-no_of_lines=$((5*$no_of_ques))					#number of lines present in questions.txt file
+no_of_lines=$((5*$no_of_ques))						#number of lines present in questions.txt file
 marks_per_ques=1							#marks carried be each question
 total_marks=$(($no_of_ques*$marks_per_ques))				#total marks of test
 
@@ -34,7 +34,7 @@ cyan=6
 long_period=5
 short_period=3
 
-#================================= page_title function definition ===========================================
+#====================================================== page_title function definition ================================================================
 
 function page_title()
 {
@@ -46,7 +46,7 @@ function page_title()
     echo -e "   ==========================\n"
 }
 
-#================================ menu_header function definition ===========================================
+#====================================================== menu_header function definition ===============================================================
 
 function menu_header() 
 {
@@ -58,7 +58,7 @@ function menu_header()
     echo -e "3. Exit\n"
 }
 
-#=============================== view_response function definition ==========================================
+#====================================================== view_response function definition =============================================================
 
 function view_response()
 {
@@ -111,7 +111,7 @@ function view_response()
     fi
 }
 
-#================================= test_screen function definition =========================================
+#=================================================== test_screen function definition =================================================================
 
 function test_screen()
 {
@@ -154,7 +154,7 @@ function test_screen()
     fi
 }
 
-#================================== test_menu function definition ==========================================
+#=================================================== test_menu function definition ====================================================================
 
 function test_menu()
 {
@@ -184,7 +184,7 @@ function test_menu()
     done
 }
 
-#=================================== sign_in function definition ===========================================
+#===================================================== sign_in function definition ===================================================================
 
 function sign_in()
 {
@@ -202,8 +202,8 @@ function sign_in()
 	if [ ! -s "$username_file" ]				#checking that user_name.csv file is empty or not
         then
 	    echo -e "$(tput setaf $red)$(tput bold)\n\nYou need to sign up first to attend the test.\n$(tput sgr 0)\nPlease wait going to sign in screen....."
-	    sleep $short_period				#delay 
-	    user_flag=1					#setting user_flag to not to continue with the sign in process
+	    sleep $short_period					#delay 
+	    user_flag=1						#setting user_flag to not to continue with the sign in process
 	else
             if [ $error_user -eq 1 ]
             then
@@ -243,18 +243,18 @@ function sign_in()
 		            #calling test_menu function
 		            test_menu
 	                else
-	                    error_pass=1				#setting error_pass flag as the user entered wrong password
+	                    error_pass=1			#setting error_pass flag as the user entered wrong password
 	                fi
 	            done
 	        else
-	            error_user=1					#setting error_user flag as the entered user name is not present
+	            error_user=1				#setting error_user flag as the entered user name is not present
                 fi
             done
 	fi
     done
 }
 
-#=================================== sign_up function definition ============================================
+#======================================================== sign_up function definition =================================================================
 
 function sign_up()
 {
@@ -344,7 +344,7 @@ function sign_up()
      done
 }
 
-#=============================== file_existence function definition =========================================
+#==================================================== file_existence function definition ==============================================================
 
 function file_existence()
 {
@@ -353,9 +353,9 @@ function file_existence()
         mkdir "$question_answer_directory"			#creating question_answer directory
     fi
     
-    if [ ! -d $user_info_directory ]			       #checking user_info directory is present or not
+    if [ ! -d $user_info_directory ]			        #checking user_info directory is present or not
     then
-        mkdir "$user_info_directory"			       #creating user_info directory
+        mkdir "$user_info_directory"			        #creating user_info directory
     fi
     
     if [ ! -d $user_response_directory ]			#checking user_response directory is present or not
@@ -363,30 +363,30 @@ function file_existence()
         mkdir "$user_response_directory"			#creating user_response directory
     fi
     
-    if [ ! -f $question_bank ]				#checking questions.txt file is present or not
+    if [ ! -f $question_bank ]					#checking questions.txt file is present or not
     then
         echo -e "$(tput setaf $red)\nQuestion bank file is not present in the question_answer directory.\nPlease create it...\n$(tput sgr 0)"
         exit_flag=1					#setting exit_flag to come out of the while loop        
     fi
     
-    if [ ! -f $correct_answer_file ]			#checking answer.txt file is present or not
+    if [ ! -f $correct_answer_file ]				#checking answer.txt file is present or not
     then
         echo -e "$(tput setaf $red)\nCorrect answer file is not present in the question_answer directory.\nPlease create it...\n$(tput sgr 0)"
-        exit_flag=1					#setting exit_flag to come out of the while loop
+        exit_flag=1						#setting exit_flag to come out of the while loop
     fi
     
-    if [ ! -f $username_file ]			#checking user_name.csv file is present or not
+    if [ ! -f $username_file ]					#checking user_name.csv file is present or not
     then
-        touch "$username_file"			#creating user_name.csv file
+        touch "$username_file"					#creating user_name.csv file
     fi
     
-    if [ ! -f $userpass_file ]			#checking user_pass.csv file is present or not
+    if [ ! -f $userpass_file ]					#checking user_pass.csv file is present or not
     then
-        touch "$userpass_file"			#creating user_pass.csv file
+        touch "$userpass_file"					#creating user_pass.csv file
     fi
 }
 
-#====================================== Main Script ==========================================================
+#============================================================= Main Script ============================================================================
 
 exit_flag=0							#initializing the exit_flag to continue the while loop
 while [ $exit_flag -eq 0 ]
