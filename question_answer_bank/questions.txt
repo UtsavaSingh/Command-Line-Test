@@ -1,0 +1,50 @@
+1. What is a shell script?
+a) group of commands
+b) a file containing special symbols
+c) a file containing a series of commands
+d) group of functions
+2. The first line in any shell script begins with a _____
+a) &
+b) !
+c) $
+d) #
+3. To run the script, we should make it executable first by using _____
+a) chmod +x
+b) chmod +r
+c) chmod +w
+d) chmod +rwx
+4. Which command is used for making the scripts interactive?
+a) ip
+b) input
+c) read
+d) write
+5. The first argument is read by the shell into the parameter ___
+a) 1$
+b) $3
+c) $$
+d) $1
+6. The complete set of positional parameters is stored in ______ as a single string.
+a) $n
+b) $#
+c) $*
+d) $$
+7. Which of the following is used for storing the number of positional parameters?
+a) $n
+b) $#
+c) $*
+d) $2
+8. The Unix shell is both _______ and _______ language.
+a) scripting, interpreter
+b) high level, low level
+c) interactive, responsive
+d) interpreter, executing
+9. In which language UNIX is written?
+a) C++
+b) C
+c) JAVA
+d) Python
+10. Which part of the Unix operating system interacts with the hardware?
+a) Application program
+b) Vi editor
+c) Shell
+d) Kernel
