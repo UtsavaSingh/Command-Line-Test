@@ -49,7 +49,56 @@ with at-least a number and symbol
 
 * Show Test Response
 	* If the user chooses this option, the script should show all the questions with all options, correct answer and user's answer for each question
-	* At last total marks will be displayed gained be the user
+	* At last total marks will be displayed gained by the user
 	
 *  Time-out
 	*  The script will timeout if the user input is absent for more than 10 seconds on the main menu and test menu.
+
+### Sample Output
+----------------------
+
+Here are the sample output by the end of Linux Shell Scripting Project execution.	
+
+|![Main Screen](https://user-images.githubusercontent.com/82516591/186354107-202ff9c8-e605-4ebf-9b4e-a03cb874fd4f.png)|
+|:--:|
+| <b>Fig1: Main Screen</b> |
+
+|![Sign Up Screen](https://user-images.githubusercontent.com/82516591/186355477-22673118-7972-4ec7-8673-04f62edf4d59.png)|
+|:--:|
+| <b>Fig2: Sign Up Screen</b> |
+
+|![Sign Up Screen, Credentials Entered](https://user-images.githubusercontent.com/82516591/186358860-4a121e9e-3667-419c-8f92-d1d5a3858522.png)|
+|:--:|
+| <b>Fig3: Sign Up Screen, Credentials Entered</b> |
+
+|![Sign Up with the same User Name again!!](https://user-images.githubusercontent.com/82516591/186359005-5eb738e3-99ba-4144-8716-76b72d52604d.png)|
+|:--:|
+| <b>Fig4: Sign Up with the same User Name again!!</b> |
+
+|![Sign In Screen, Password in shadow mode](https://user-images.githubusercontent.com/82516591/186359249-78233b08-36a1-4997-bfbf-72c0570229ba.png)|
+|:--:|
+| <b>Fig5: Sign In Screen, Password in shadow mode</b> |
+
+|![Sign In Sucessful Screen](https://user-images.githubusercontent.com/82516591/186359458-cf29bc88-9437-4299-85ae-17e85aee7a78.png)|
+|:--:|
+| <b>Fig6: Sign In Sucessful Screen</b> |
+
+|![Features Screen, Proceeding to Take a Test](https://user-images.githubusercontent.com/82516591/186359708-f1baf8a3-5171-477c-9f94-ff26d5fc781d.png)|
+|:--:|
+| <b>Fig7: Features Screen, Proceeding to Take a Test</b> |
+
+|![Test in progress](https://user-images.githubusercontent.com/82516591/186359856-736514f3-859b-4a70-a260-2ec99f343a2c.png)|
+|:--:|
+| <b>Fig8: Test in progress, Every question is Timed</b> |
+
+|![Test completion screen](https://user-images.githubusercontent.com/82516591/186359990-e75af169-c228-4592-8d23-dc973e560ab2.png)|
+|:--:|
+| <b>Fig9: Test completion screen</b> |
+
+|![View Test Screen](https://user-images.githubusercontent.com/82516591/186360274-d651f9cb-b4f4-4004-8bf1-5d80088b4464.png)|
+|:--:|
+| <b>Fig10: Candidate's Test Response Screen</b> |
+
+|![View Test Screen](https://user-images.githubusercontent.com/82516591/186360557-02fa279a-fc2a-4185-b547-dd88c743d9bc.png)|
+|:--:|
+| <b>Fig11: Candidate's Test Response Screen(with marks)</b> |
