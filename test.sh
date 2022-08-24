@@ -337,7 +337,7 @@ function sign_up()
 	         echo -e "\nNote: * The password must contain a mix of letters, numbers and special characters"
 	         echo -e "      * The length of password must be greater than or equal to 8\n"
 	     fi
-	     echo -e "\nPlease enter your password: "
+	     echo -n "Please enter your password: "
 	     read -s pass
              len_pass=${#pass} 					#saving the length of 'pass' variable into len_pass variable
              #checking that the 'pass' variable contains mix of letters, numbers and special characters and also length is at least 8 or not
@@ -350,7 +350,7 @@ function sign_up()
 		 msg_flag=0					#resetting msg_flag as the conditions are already printed 
              fi
          done
-         echo -e  "\nPlease re-enter your password: "
+         echo -e -n "\nPlease $(tput setaf $green)re-enter$(tput sgr 0) your password: "
          read -s re_pass
          if [ $pass = $re_pass ]
          then
