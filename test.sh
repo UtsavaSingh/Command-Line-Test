@@ -69,10 +69,10 @@ function view_response()
     page_title
     echo -e "$(tput setab $cyan)$(tput bold)     $user's Response Screen       $(tput sgr 0) \n"
     #checking user's answer file is present or not i.e. user has given the test or not
-    if [ -f ./"$user_response_diretory"/"$user"_answer.txt ]						
+    if [ -f ./"$user_response_directory"/"$user"_answer.txt ]						
     then
 	correct_answer=( `cat $correct_answer_file` )				#storing answers.txt content in an 'correct_answers' array 
-    	user_answer=( `cat ./"$user_response_diretory"/"$user"_answer.txt` )	#storing user_answer.txt content in an 'user_answer' array
+    	user_answer=( `cat ./"$user_response_directory"/"$user"_answer.txt` )	#storing user_answer.txt content in an 'user_answer' array
     	position=0								#initializing 'position' variable
     	marks=0									#initializing 'marks' variable		
     	#for loop with i=5 as initial value then incrementing it by 5 each time upto number of lines present in question band file
@@ -122,7 +122,7 @@ function test_screen()
     page_title
     echo -e "$(tput setab $cyan)$(tput bold)           Test Screen             $(tput sgr 0) \n"
     #checking user's answer file is present or not i.e. user has given the test or not
-    if [ -f ./"$user_response_diretory"/"$user"_answer.txt ]
+    if [ -f ./"$user_response_directory"/"$user"_answer.txt ]
     then
 	echo -e "$(tput setaf $green)$(tput bold)\nYou have already submitted the test.$(tput sgr 0)\n\nPlease wait going to previous screen....."
 	sleep $short_period							#delay 
@@ -150,7 +150,7 @@ function test_screen()
 	            ans="e"
 	        fi
             done
-            echo "$ans" >> ./"$user_response_diretory"/"$user"_answer.txt	#append 'ans' variable value into answer.txt file
+            echo "$ans" >> ./"$user_response_directory"/"$user"_answer.txt	#append 'ans' variable value into answer.txt file
         done
         echo -e "$(tput setaf $yellow)$(tput bold)\n\nTest Completed, will be logged off shortly$(tput sgr 0)"
         sleep $long_period							#delay 
