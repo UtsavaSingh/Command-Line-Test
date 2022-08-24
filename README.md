@@ -50,3 +50,6 @@ with at-least a number and symbol
 * Show Test Response
 	* If the user chooses this option, the script should show all the questions with all options, correct answer and user's answer for each question
 	* At last total marks will be displayed gained be the user
+	
+*  Time-out
+	*  The script will timeout if the user input is absent for more than 10 seconds on the main menu and test menu.
