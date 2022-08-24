@@ -7,21 +7,21 @@ doc
 #!/bin/bash
 
 # The directory names
-question_answer_directory=question_answer_bank				#This directory contains questions.txt and answer.txt files
-user_info_directory=.user_info						#This hidden directory contains user_name.csv and user_pass.csv files
-user_response_directory=.user_response					#This hidden dierctory contains all the user's_response.txt files
+question_answer_directory=question_answer_bank			#This directory contains questions.txt and answer.txt files
+user_info_directory=.user_info					#This hidden directory contains user_name.csv and user_pass.csv files
+user_response_directory=.user_response				#This hidden dierctory contains all the user's_response.txt files
 
 # The file names
-question_bank=./"$question_answer_directory"/questions.txt		#questions.txt file contains all the questions for the test
-correct_answer_file=./"$question_answer_directory"/answer.txt		#answer.txt file contains all the answers of each question inside questions.txt file
-username_file=./"$user_info_directory"/user_name.csv			#user_name.csv file contains the user names of each user who has signed up
-userpass_file=./"$user_info_directory"/user_pass.csv			#user_pass.csv file contains the user passwords of each user who has signed up
+question_bank=./"$question_answer_directory"/questions.txt	#questions.txt file contains all the questions for the test
+correct_answer_file=./"$question_answer_directory"/answer.txt	#answer.txt file contains all the answers of each question inside questions.txt file
+username_file=./"$user_info_directory"/user_name.csv		#user_name.csv file contains the user names of each user who has signed up
+userpass_file=./"$user_info_directory"/user_pass.csv		#user_pass.csv file contains the user passwords of each user who has signed up
 
 # Global variables
-no_of_ques=10					    			#number of questions present in questions.txt file
-no_of_lines=$((5*$no_of_ques))						#number of lines present in questions.txt file
-marks_per_ques=1							#marks carried be each question
-total_marks=$(($no_of_ques*$marks_per_ques))				#total marks of test
+no_of_ques=10					    		#number of questions present in questions.txt file
+no_of_lines=$((5*$no_of_ques))					#number of lines present in questions.txt file
+marks_per_ques=1						#marks carried be each question
+total_marks=$(($no_of_ques*$marks_per_ques))			#total marks of test
 
 # Colour codes for 'tput' command
 red=1
@@ -31,10 +31,12 @@ blue=4
 cyan=6
 
 # Time out periods
-long_period=5
-short_period=3
+menu_time_out=10						#time to log out if user does not given any response
+answer_response_time=10						#time given for the answer response for each question to the user
+long_period=5							#long delay time to show the message
+short_period=3							#short delay time to show the message
 
-#====================================================== page_title function definition ================================================================
+#===================================================== page_title function definition ==================================================================
 
 function page_title()
 {
@@ -46,7 +48,7 @@ function page_title()
     echo -e "   ==========================\n"
 }
 
-#====================================================== menu_header function definition ===============================================================
+#===================================================== menu_header function definition =================================================================
 
 function menu_header() 
 {
@@ -56,20 +58,21 @@ function menu_header()
     echo "1. Sign in"
     echo "2. Sign up"
     echo -e "3. Exit\n"
+    echo -e "$(tput setaf $red)$(tput bold)Note:$(tput sgr 0) Script Exit Timeout is set\n"
 }
 
-#====================================================== view_response function definition =============================================================
+#==================================================== view_response function definition ================================================================
 
 function view_response()
 {
     #calling page_title function
     page_title
-    echo -e "$(tput setab $cyan)$(tput bold)     Candidate's Response Screen       $(tput sgr 0) \n"
+    echo -e "$(tput setab $cyan)$(tput bold)     $user's Response Screen       $(tput sgr 0) \n"
     #checking user's answer file is present or not i.e. user has given the test or not
     if [ -f ./"$user_response_diretory"/"$user"_answer.txt ]						
     then
 	correct_answer=( `cat $correct_answer_file` )				#storing answers.txt content in an 'correct_answers' array 
-    	user_answer=( `cat ./"$user_response_diretory"/"$user"_answer.txt` )				#storing user_answer.txt content in an 'user_answer' array
+    	user_answer=( `cat ./"$user_response_diretory"/"$user"_answer.txt` )	#storing user_answer.txt content in an 'user_answer' array
     	position=0								#initializing 'position' variable
     	marks=0									#initializing 'marks' variable		
     	#for loop with i=5 as initial value then incrementing it by 5 each time upto number of lines present in question band file
@@ -106,12 +109,12 @@ function view_response()
         read -p "Press Enter key to go to previous menu" a
     else
 	#If the user's answer file is not present i.e. user has not given the test
-	echo -e "\n$(tput bold)You have not attended the test.$(tput sgr 0)\nPlease wait going to previous screen....."
+	echo -e "\n$(tput setaf $red)$(tput bold)You have not attended the test.$(tput sgr 0)\n\nPlease wait going to previous screen....."
 	sleep $short_period							#delay 
     fi
 }
 
-#=================================================== test_screen function definition =================================================================
+#====================================================== test_screen function definition ================================================================
 
 function test_screen()
 {
@@ -121,8 +124,8 @@ function test_screen()
     #checking user's answer file is present or not i.e. user has given the test or not
     if [ -f ./"$user_response_diretory"/"$user"_answer.txt ]
     then
-	echo -e "$(tput bold)\nYou have already submitted the test.$(tput sgr 0)\nPlease wait going to previous screen....."
-	sleep $short_period					#delay 
+	echo -e "$(tput setaf $green)$(tput bold)\nYou have already submitted the test.$(tput sgr 0)\n\nPlease wait going to previous screen....."
+	sleep $short_period							#delay 
     else
         #If the user's answer file is not present i.e. user has not given the test
         #for loop with i=5 as initial value then incrementing it by 5 each time upto 50
@@ -132,12 +135,12 @@ function test_screen()
 	    page_title
 	    echo -e "$(tput setab $cyan)$(tput bold)          Test Screen            $(tput sgr 0) \n"
 	    echo -e "Total Marks : $total_marks         Each Question Marks : $marks_per_ques\n\n"
-            head -$i $question_bank | tail -5			#printing each question with options
+            head -$i $question_bank | tail -5					#printing each question with options
             echo
-            for j in `seq 10 -1 1`
+            for j in `seq "$answer_response_time" -1 1`
             do
 		echo -n -e "\rTime Remaining: $j Seconds;    Choose your option: \c"
-	        read -t 1 ans					#take input as single character 
+	        read -t 1 ans							#take input as single character 
 
 	        #if no character is passed as input than save default value 'e' in 'ans' variable
 	        if [ -n "$ans" ]				
@@ -147,18 +150,18 @@ function test_screen()
 	            ans="e"
 	        fi
             done
-            echo "$ans" >> ./"$user_response_diretory"/"$user"_answer.txt		#append 'ans' variable value into answer.txt file
+            echo "$ans" >> ./"$user_response_diretory"/"$user"_answer.txt	#append 'ans' variable value into answer.txt file
         done
         echo -e "$(tput setaf $yellow)$(tput bold)\n\nTest Completed, will be logged off shortly$(tput sgr 0)"
-        sleep $long_period					#delay 
+        sleep $long_period							#delay 
     fi
 }
 
-#=================================================== test_menu function definition ====================================================================
+#======================================================== test_menu function definition =================================================================
 
 function test_menu()
 {
-    test_menu_exit=0						#initializing a flag to continue or exit the test menu
+    test_menu_exit=0								#initializing a flag to continue or exit the test menu
     while [ $test_menu_exit -eq 0 ]
     do
 	#calling page_title function
@@ -167,7 +170,20 @@ function test_menu()
         echo "1. Take a Test"
         echo "2. View your test"
         echo -e "3. Sign Out\n"
-        read -p "Please choose your option: " choice
+        
+	#logic for time-out
+        for j in `seq "$menu_time_out" -1 1`
+        do
+           echo -n -e "\rPlease choose your option: \c"
+	   read -t 1 choice					#taking user choice as single character 
+	   #if no character is passed as input than save default value '+' in 'choice' variable
+	    if [ -n "$choice" ]				
+	    then
+		break						#come out of if condition block if user entered any input
+            else
+		choice=+
+	    fi
+        done
 
         case $choice in
 	    1) test_screen					#test_screen function call if user choose option 1
@@ -176,15 +192,20 @@ function test_menu()
                ;;
             3) test_menu_exit=1					#setting test_menu_exit flag to exit from the while loop if user choose option 3
                ;;
+            +) #If user has not entered any value in set time out period then this option will execute
+    	       echo -e "$(tput setaf $red)\n\nTime out occured as you have not choosen any option$(tput sgr 0)\nPlease wait, going to main menu... "
+    	       test_menu_exit=1					#setting exit_flag to come out of the while loop if user has not given any input
+    	       sleep $long_period				#delay 
+    	       ;;
 	   *)  #defualt condition if the user enterd some other value
-	       echo -e "$(tput setaf $red)\nPlease choose the correct option$(tput sgr 0)\nPlease wait then try again....."
+	       echo -e "$(tput setaf $red)\n\nPlease choose the correct option$(tput sgr 0)\n\nPlease wait, then try again....."
 	       sleep $short_period				#delay 
                ;;
         esac	   
     done
 }
 
-#===================================================== sign_in function definition ===================================================================
+#======================================================= sign_in function definition ====================================================================
 
 function sign_in()
 {
@@ -254,7 +275,7 @@ function sign_in()
     done
 }
 
-#======================================================== sign_up function definition =================================================================
+#===================================================== sign_up function definition ======================================================================
 
 function sign_up()
 {
@@ -334,7 +355,7 @@ function sign_up()
          if [ $pass = $re_pass ]
          then
 	     echo "$pass" >> "$userpass_file"			#append the value of 'pass' variable into 'user_pass.csv' file
-	     echo -e "$(tput setaf $green)\n\nRegistration Successful!$(tput sgr 0)\nPlease wait going to sign in screen....."
+	     echo -e "$(tput setaf $green)\n\nRegistration Successful!$(tput sgr 0)\n\nPlease wait going to sign in screen....."
 	     sleep $short_period				#delay
 	     match_flag=1					#setting match_flag as the both the password matches
          else
@@ -344,7 +365,7 @@ function sign_up()
      done
 }
 
-#==================================================== file_existence function definition ==============================================================
+#================================================= file_existence function definition ===================================================================
 
 function file_existence()
 {
@@ -355,7 +376,7 @@ function file_existence()
     
     if [ ! -d $user_info_directory ]			        #checking user_info directory is present or not
     then
-        mkdir "$user_info_directory"			        #creating user_info directory
+        mkdir "$user_info_directory"  			        #creating user_info directory
     fi
     
     if [ ! -d $user_response_directory ]			#checking user_response directory is present or not
@@ -366,7 +387,7 @@ function file_existence()
     if [ ! -f $question_bank ]					#checking questions.txt file is present or not
     then
         echo -e "$(tput setaf $red)\nQuestion bank file is not present in the question_answer directory.\nPlease create it...\n$(tput sgr 0)"
-        exit_flag=1					#setting exit_flag to come out of the while loop        
+        exit_flag=1						#setting exit_flag to come out of the while loop        
     fi
     
     if [ ! -f $correct_answer_file ]				#checking answer.txt file is present or not
@@ -386,7 +407,7 @@ function file_existence()
     fi
 }
 
-#============================================================= Main Script ============================================================================
+#============================================================= Main Script ==============================================================================
 
 exit_flag=0							#initializing the exit_flag to continue the while loop
 while [ $exit_flag -eq 0 ]
@@ -397,7 +418,20 @@ do
     file_existence						#checking that both question and answer file is present or not
     if [ $exit_flag -eq 0 ]					
     then
-        read -p "Please choose your option: " choice		#taking user choice
+        #logic for time-out
+	for j in `seq "$menu_time_out" -1 1`
+        do
+            echo -n -e "\rPlease choose your option: \c"
+	    read -t 1 choice					#taking user choice as single character 
+	    #if no character is passed as input than save default value '+' in 'choice' variable
+	    if [ -n "$choice" ]				
+	    then
+		break						#come out of if condition block if user entered any input
+            else
+		choice=+
+	    fi
+        done
+        
         case $choice in	
             1) sign_in 						#calling sign_in function if user choose option 1
 	       ;;
@@ -405,10 +439,16 @@ do
 	       ;;
     	    3) exit_flag=1					#setting exit_flag to come out of the while loop if user choose option 3
     	       ;;
+    	    +) #If user has not entered any value in set time out period then this option will execute
+    	       echo -e "$(tput setaf $red)\n\nTime out occured as you have not choosen any option$(tput sgr 0)\n"
+    	       exit_flag=1					#setting exit_flag to come out of the while loop if user has not given any input
+    	       ;;
 	    *)  #defualt condition if the user enterd some other value
-	       echo "$(tput setaf $red)Please coose the correct option!$(tput sgr 0)\nPlease wait and try again"
+	       echo -e "$(tput setaf $red)\nPlease coose the correct option!$(tput sgr 0)\n\nPlease wait and try again"
 	       sleep $short_period				#delay
     	       ;;
         esac
     fi
-done     
+done  
+
+************************************************************* End of Script ****************************************************************************
