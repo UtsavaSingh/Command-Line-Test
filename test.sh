@@ -193,7 +193,7 @@ function test_menu()
             3) test_menu_exit=1					#setting test_menu_exit flag to exit from the while loop if user choose option 3
                ;;
             +) #If user has not entered any value in set time out period then this option will execute
-    	       echo -e "$(tput setaf $red)\n\nTime out occured as you have not choosen any option$(tput sgr 0)\nPlease wait, going to main menu... "
+    	       echo -e "$(tput setaf $red)\n\nTime out occured as you have not chosen any option$(tput sgr 0)\nPlease wait, going to main menu... "
     	       test_menu_exit=1					#setting exit_flag to come out of the while loop if user has not given any input
     	       sleep $long_period				#delay 
     	       ;;
@@ -440,11 +440,11 @@ do
     	    3) exit_flag=1					#setting exit_flag to come out of the while loop if user choose option 3
     	       ;;
     	    +) #If user has not entered any value in set time out period then this option will execute
-    	       echo -e "$(tput setaf $red)\n\nTime out occured as you have not choosen any option$(tput sgr 0)\n"
+    	       echo -e "$(tput setaf $red)\n\nTime out occured as you have not chosen any option$(tput sgr 0)\n"
     	       exit_flag=1					#setting exit_flag to come out of the while loop if user has not given any input
     	       ;;
 	    *)  #defualt condition if the user enterd some other value
-	       echo -e "$(tput setaf $red)\nPlease coose the correct option!$(tput sgr 0)\n\nPlease wait and try again"
+	       echo -e "$(tput setaf $red)\nPlease choose the correct option!$(tput sgr 0)\n\nPlease wait and try again"
 	       sleep $short_period				#delay
     	       ;;
         esac
